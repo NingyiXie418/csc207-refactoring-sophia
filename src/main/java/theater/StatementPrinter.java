@@ -28,8 +28,6 @@ public class StatementPrinter {
                 + invoice.getCustomer()
                 + System.lineSeparator());
 
-        final NumberFormat frmt = NumberFormat.getCurrencyInstance(Locale.US);
-
         for (Performance p : invoice.getPerformances()) {
             final Play play = plays.get(p.getPlayID());
 
@@ -38,9 +36,8 @@ public class StatementPrinter {
                 case "tragedy":
                     thisAmount = Constants.TRAGEDY_BASE_AMOUNT;
                     if (p.getAudience() > Constants.TRAGEDY_AUDIENCE_THRESHOLD) {
-                        thisAmount += Constants.HISTORY_OVER_BASE_CAPACITY_PER_PERSON
-                                * (p.getAudience()
-                                - Constants.TRAGEDY_AUDIENCE_THRESHOLD);
+                        thisAmount += Constants.TRAGEDY_OVER_BASE_CAPACITY_PER_PERSON
+                                * (p.getAudience() - Constants.TRAGEDY_AUDIENCE_THRESHOLD);
                     }
                     break;
                 case "comedy":
@@ -59,12 +56,12 @@ public class StatementPrinter {
             volumeCredits += getVolumeCredits(p, play);
 
             // print line for this order
-            result.append(String.format("  %s: %s (%s seats)%n", play.getName(),
-                    frmt.format(thisAmount / Constants.PERCENT_FACTOR),
-                    p.getAudience()));
+            // print line for this order
+            result.append(String.format("  %s: %s (%s seats)%n",
+                    play.getName(), usd(thisAmount), p.getAudience()));
             totalAmount += thisAmount;
         }
-        result.append(String.format("Amount owed is %s%n", frmt.format(totalAmount / Constants.PERCENT_FACTOR)));
+        result.append(String.format("Amount owed is %s%n", usd(totalAmount)));
         result.append(String.format("You earned %s credits%n", volumeCredits));
         return result.toString();
     }
@@ -75,5 +72,10 @@ public class StatementPrinter {
             result += performance.getAudience() / Constants.COMEDY_EXTRA_VOLUME_FACTOR;
         }
         return result;
+    }
+
+    private String usd(int amount) {
+        final NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.US);
+        return currencyFormatter.format((double) amount / Constants.PERCENT_FACTOR);
     }
 }
