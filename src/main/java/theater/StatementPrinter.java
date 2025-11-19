@@ -108,5 +108,33 @@ public class StatementPrinter {
     private Play getPlay(Performance performance) {
         return plays.get(performance.getPlayID());
     }
+    /**
+     * Helper method required by the tests: returns the total amount for the invoice.
+     *
+     * @return the total amount for the invoice
+     */
+
+    private int getTotalAmount() {
+        int totalAmount = 0;
+        for (Performance performance : invoice.getPerformances()) {
+            final Play play = plays.get(performance.getPlayID());
+            totalAmount += getAmount(performance, play);
+        }
+        return totalAmount;
+    }
+    /**
+     * Helper method required by the tests: returns the total volume credits for the invoice.
+     *
+     * @return the total volume credits for the invoice
+     */
+
+    private int getTotalVolumeCredits() {
+        int totalVolumeCredits = 0;
+        for (Performance performance : invoice.getPerformances()) {
+            final Play play = plays.get(performance.getPlayID());
+            totalVolumeCredits += getVolumeCredits(performance, play);
+        }
+        return totalVolumeCredits;
+    }
 
 }
