@@ -1,0 +1,18 @@
+d2ddb31 Task 2.4
+e4bf019 Task 2.3
+bf79c16 Task 2.2
+28eb818 Task 2.1
+36b701f Task 1.2
+91a1bab Task 1.1: Made changes to StatementPrinter
+c540827 Make helper methods getTotalAmount/getTotalVolumeCredits private
+b37d878 Add getPlay method for test compatibility
+d671cb4 Task 2.4: split calculation logic
+1aba485 Task 2.3: extract usd and volume credits
+d4a9348 Task 2.2: introduce helper methods
+fb6cc0e Task 2.1: refactor constants and fields
+35dccdc Task 1.2: finish initial setup
+0bd3382 task 2.4
+cab59db task2.3
+fde0355 task 2
+1bddc3d task 1.1
+b40af51 Initial commit
