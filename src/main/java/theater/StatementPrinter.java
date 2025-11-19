@@ -98,4 +98,15 @@ public class StatementPrinter {
         final NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.US);
         return currencyFormatter.format((double) amount / Constants.PERCENT_FACTOR);
     }
+    /**
+     * Helper method required by the tests: returns the Play for a Performance.
+     *
+     * @param performance the performance whose play should be retrieved
+     * @return the Play corresponding to the given performance
+     */
+
+    private Play getPlay(Performance performance) {
+        return plays.get(performance.getPlayID());
+    }
+
 }
